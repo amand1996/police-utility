@@ -13,12 +13,25 @@ var Enquiry = new keystone.List('Enquiry', {
 
 Enquiry.add({
 	name: { type: Types.Name, required: true },
+	status: { type: Types.Select, options: [
+		{ value: 'pending', label: 'Pending' },
+		{ value: 'done', label: 'Done' },
+	] },
+	policeStation: { type: Types.Select, options: [
+		{ value: 'ranjhi', label: 'Ranjhi' },
+		{ value: 'vijaynagar', label: 'Vijaynagar' },
+	] },
+	priority: { type: Types.Select, options: [
+		{ value: 'normal', label: 'Normal' },
+		{ value: 'important', label: 'Important' },
+		{ value: 'urgent', label: 'Urgent' },
+	] },
 	email: { type: Types.Email, required: true },
 	phone: { type: String },
 	enquiryType: { type: Types.Select, options: [
-		{ value: 'message', label: 'Just leaving a message' },
-		{ value: 'question', label: 'I\'ve got a question' },
-		{ value: 'other', label: 'Something else...' },
+		{ value: 'dg', label: 'DG' },
+		{ value: 'high_court', label: 'High Court' },
+		{ value: 'de/pe', label: 'DE/PE' },
 	] },
 	message: { type: Types.Markdown, required: true },
 	createdAt: { type: Date, default: Date.now },
@@ -59,5 +72,5 @@ Enquiry.schema.methods.sendNotificationEmail = function (callback) {
 };
 
 Enquiry.defaultSort = '-createdAt';
-Enquiry.defaultColumns = 'name, email, enquiryType, createdAt';
+Enquiry.defaultColumns = 'name, enquiryType, createdAt, message, policeStation, priority';
 Enquiry.register();

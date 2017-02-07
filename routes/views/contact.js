@@ -9,6 +9,8 @@ exports = module.exports = function (req, res) {
 	// Set locals
 	locals.section = 'contact';
 	locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
+	locals.priorities = Enquiry.fields.priority.ops;
+	locals.policeStations = Enquiry.fields.policeStation.ops;
 	locals.formData = req.body || {};
 	locals.validationErrors = {};
 	locals.enquirySubmitted = false;
@@ -21,7 +23,7 @@ exports = module.exports = function (req, res) {
 
 		updater.process(req.body, {
 			flashErrors: true,
-			fields: 'name, email, phone, enquiryType, message',
+			fields: 'name, email, phone, enquiryType, message, status, policeStation, priority',
 			errorMessage: 'There was a problem submitting your enquiry:',
 		}, function (err) {
 			if (err) {
