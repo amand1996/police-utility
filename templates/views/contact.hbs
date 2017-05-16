@@ -1,6 +1,19 @@
 <div class="container">
 	<h1>Complaint Portal</h1>
 </div>
+<script type="text/javascript">
+		function onPositionUpdate(position)
+        {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            alert("Current position: " + lat + " " + lng);
+        }
+
+        if(navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(onPositionUpdate);
+        else
+            alert("navigator.geolocation is not available");
+</script>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-md-6">
